@@ -1,0 +1,37 @@
+{
+  "name": "react-demo",
+  "version": "1.0.0",
+  "description": "A react demo",
+  "main": "index.js",
+  "author": "Kashin",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^8.1.2",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.8",
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^2.30.1",
+    "style-loader": "^0.19.1",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack-dev-server": "^2.10.0",
+    "webpack-merge": "^4.1.1"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "lint": "eslint 'src/*.{js,jsx}'",
+    "dev": "webpack-dev-server --config webpack/webpack.dev.conf.js",
+    "build": "webpack --config webpack/webpack.prod.conf.js"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "webpack": "^3.10.0"
+  }
+}
