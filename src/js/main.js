@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { printMe } from './print';
 // import { printModule } from './another';
 // import { printModule2 } from './another2';
-import '../styles/main.css';
+import '../styles/main.scss';
 
 const component = () => {
   const element = document.createElement('div');

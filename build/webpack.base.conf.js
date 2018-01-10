@@ -1,5 +1,4 @@
 const path = require('path');
-const utils = require('./utils');
 const config = require('../config');
 
 const resolve = dir => path.join(__dirname, '..', dir);
@@ -29,10 +28,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.css/,
-        use: ['style-loader', 'css-loader'],
-      },
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: ['file-loader'],
