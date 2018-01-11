@@ -6,13 +6,12 @@ const resolve = dir => path.join(__dirname, '..', dir);
 module.exports = {
   entry: {
     app: resolve('src/js/main.js'),
-    // another: resolve('src/js/another.js'),
     vendor: ['lodash'],
   },
   output: {
     path: resolve('dist'),
-    filename: 'js/[name].[hash].bundle.js',
-    chunkFilename: 'js/[id].[hash].bundle.js',
+    filename: '[name].bundle.js',
+    chunkFilename: '[id].bundle.js',
     publicPath:
       process.env.NODE_ENV === 'production'
         ? config.build.assetsPublicPath
@@ -29,12 +28,28 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader'],
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'img/[name].[hash:7].[ext]',
+        },
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader'],
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'media/[name].[hash:7].[ext]',
+        },
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'fonts/[name].[hash:7].[ext]',
+        },
       },
     ],
   },

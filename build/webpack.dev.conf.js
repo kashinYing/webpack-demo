@@ -7,70 +7,59 @@ const baseWebpackConfig = require('./webpack.base.conf');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const resolve = dir => path.join(__dirname, '..', dir);
 
-const extractSass = new ExtractTextPlugin({
-  filename:
-    process.env.NODE_ENV === 'development'
-      ? 'css/[name].[hash].css'
-      : 'css/[name].[contenthash].css',
-});
-
-const extractLess = new ExtractTextPlugin({
-  filename:
-    process.env.NODE_ENV === 'development'
-      ? 'css/[name].[hash].css'
-      : 'css/[name].[contenthash].css',
-});
-
 const devWebpackConfig = merge(baseWebpackConfig, {
+  // add scss & less loader
   module: {
     rules: [
       {
         test: /\.scss$/,
-        use: extractSass.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-              },
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
             },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true,
-              },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
             },
-          ],
-        }),
+          },
+        ],
       },
       {
         test: /\.less$/,
-        use: extractLess.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-              },
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
             },
-            {
-              loader: 'less-loader',
-              options: {
-                sourceMap: true,
-              },
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              sourceMap: true,
             },
-          ],
-        }),
+          },
+        ],
       },
     ],
   },
+
+  // use development sourceMap
   devtool: config.dev.devtool,
+
   devServer: {
     historyApiFallback: {
       rewrites: [
@@ -94,10 +83,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           errors: true,
         }
       : false,
+    watchOptions: {
+      poll: config.dev.poll,
+    },
   },
+
+  // config development plugin
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': config.dev.NODE_ENV,
+      'process.env.NODE_ENV': JSON.stringify(config.dev.env),
     }),
     new CleanWebpackPlugin(['dist'], {
       root: path.join(__dirname, '..'),
@@ -105,21 +99,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       dry: false,
     }),
     new HtmlWebpackPlugin({
-      title: 'Webpack Demo',
+      title: config.dev.projectTitle,
+      filename: 'index.html',
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'runtime',
-    }),
-    extractSass,
-    extractLess,
   ],
 });
-
-console.log(devWebpackConfig.module);
 
 module.exports = devWebpackConfig;

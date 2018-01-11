@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   dev: {
-    NODE_ENV: '"development"',
+    env: 'development',
     assetsPublicPath: '/',
     host: 'localhost',
     port: 8080,
@@ -11,14 +11,19 @@ module.exports = {
     devtool: 'cheap-module-eval-source-map',
     proxyTable: {},
     errorOverlay: true,
+    projectTitle: 'Webpack-Development',
+
+    // watch duration 1s
+    poll: 1000,
   },
   build: {
-    NODE_ENV: '"production"',
-    assetsPublicPath: '/',
+    env: 'production',
+    assetsPublicPath: './',
     productionSourceMap: true,
     devtool: 'source-map',
+    projectTitle: 'Webpack-Production',
   },
   test: {
-    NODE_ENV: '"testing"',
+    env: 'testing',
   },
 };
