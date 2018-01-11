@@ -27,6 +27,20 @@ module.exports = {
   },
   module: {
     rules: [
+      ...(config.dev.useEslint
+        ? [
+            {
+              test: /\.js$/,
+              loader: 'eslint-loader',
+              enforce: 'pre',
+              include: [resolve('src'), resolve('test')],
+              options: {
+                quiet: config.dev.eslintQuiet,
+                emitWarning: !config.dev.showEslintErrorsInOverlay,
+              },
+            },
+          ]
+        : []),
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',

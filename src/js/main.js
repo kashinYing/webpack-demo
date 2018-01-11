@@ -20,10 +20,10 @@ const component = () => {
 
 // printModule();
 // printModule2();
-if (process.env.NODE_ENV === 'production') {
-  console.log('in prod env!');
-} else if (process.env.NODE_ENV === 'development') {
-  console.log('in dev env!');
-}
+// if (process.env.NODE_ENV === 'production') {
+//   console.log('in prod env!');
+// } else if (process.env.NODE_ENV === 'development') {
+//   console.log('in dev env!');
+// }
 
 document.body.appendChild(component());

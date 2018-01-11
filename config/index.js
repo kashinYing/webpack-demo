@@ -11,6 +11,13 @@ module.exports = {
     devtool: 'cheap-module-eval-source-map',
     proxyTable: {},
     errorOverlay: true,
+    notifyOnErrors: true,
+
+    // config Eslint in webpack
+    useEslint: true,
+    showEslintErrorsInOverlay: true,
+    eslintQuiet: false,
+
     projectTitle: 'Webpack-Development',
 
     // watch duration 1s
@@ -22,6 +29,13 @@ module.exports = {
     productionSourceMap: true,
     devtool: 'source-map',
     projectTitle: 'Webpack-Production',
+
+    // compress big file to gzip
+    productionGzip: false,
+    productionGzipExtensions: ['js', 'css'],
+
+    // generate bundle report
+    bundleAnalyzerReport: true,
   },
   test: {
     env: 'testing',

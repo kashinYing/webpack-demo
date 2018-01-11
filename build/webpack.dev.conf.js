@@ -1,12 +1,15 @@
 const path = require('path');
+const notifier = require('node-notifier');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
 const config = require('../config');
+const packageConfig = require('../package.json');
 const baseWebpackConfig = require('./webpack.base.conf');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 const resolve = dir => path.join(__dirname, '..', dir);
 
@@ -104,6 +107,29 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new FriendlyErrorsPlugin({
+      compilationSuccessInfo: {
+        messages: [
+          `Your application is running here: http://${config.dev.host}:${
+            config.dev.port
+          }`,
+        ],
+      },
+      onErrors: config.dev.notifyOnErrors
+        ? (severity, errors) => {
+            if (severity !== 'error') {
+              return;
+            }
+            const error = errors[0];
+            notifier.notify({
+              title: packageConfig.name,
+              message: severity + ': ' + error.name,
+              subtitle: error.file || '',
+              icon: path.join(__dirname, 'logo.png'),
+            });
+          }
+        : undefined,
+    }),
   ],
 });
 
