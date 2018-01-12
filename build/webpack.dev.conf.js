@@ -102,34 +102,35 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       dry: false,
     }),
     new HtmlWebpackPlugin({
-      title: config.dev.projectTitle,
+      template: resolve('index.html'),
       filename: 'index.html',
+      inject: true,
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new FriendlyErrorsPlugin({
-      compilationSuccessInfo: {
-        messages: [
-          `Your application is running here: http://${config.dev.host}:${
-            config.dev.port
-          }`,
-        ],
-      },
-      onErrors: config.dev.notifyOnErrors
-        ? (severity, errors) => {
-            if (severity !== 'error') {
-              return;
-            }
-            const error = errors[0];
-            notifier.notify({
-              title: packageConfig.name,
-              message: severity + ': ' + error.name,
-              subtitle: error.file || '',
-              icon: path.join(__dirname, 'logo.png'),
-            });
-          }
-        : undefined,
-    }),
+    // new FriendlyErrorsPlugin({
+    //   compilationSuccessInfo: {
+    //     messages: [
+    //       `Your application is running here: http://${config.dev.host}:${
+    //         config.dev.port
+    //       }`,
+    //     ],
+    //   },
+    //   onErrors: config.dev.notifyOnErrors
+    //     ? (severity, errors) => {
+    //         if (severity !== 'error') {
+    //           return;
+    //         }
+    //         const error = errors[0];
+    //         notifier.notify({
+    //           title: packageConfig.name,
+    //           message: severity + ': ' + error.name,
+    //           subtitle: error.file || '',
+    //           icon: path.join(__dirname, 'logo.png'),
+    //         });
+    //       }
+    //     : undefined,
+    // }),
   ],
 });
 

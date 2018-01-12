@@ -6,7 +6,8 @@ const resolve = dir => path.join(__dirname, '..', dir);
 module.exports = {
   entry: {
     app: resolve('src/js/main.js'),
-    vendor: ['lodash'],
+    // app: resolve('src/js/index.js'),
+    vendor: ['lodash', 'react', 'react-dom'],
   },
   output: {
     path: resolve('dist'),
@@ -41,6 +42,11 @@ module.exports = {
             },
           ]
         : []),
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [resolve('src'), resolve('test')],
+      },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',

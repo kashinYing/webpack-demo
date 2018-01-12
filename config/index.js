@@ -18,17 +18,14 @@ module.exports = {
     showEslintErrorsInOverlay: true,
     eslintQuiet: false,
 
-    projectTitle: 'Webpack-Development',
-
     // watch duration 1s
     poll: 1000,
   },
   build: {
     env: 'production',
-    assetsPublicPath: './',
+    assetsPublicPath: '/',
     productionSourceMap: true,
     devtool: 'source-map',
-    projectTitle: 'Webpack-Production',
 
     // compress big file to gzip
     productionGzip: false,

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { printMe } from './print';
-// import { printModule } from './another';
-// import { printModule2 } from './another2';
 import '../styles/main.scss';
+// import Icon from '../img/webpack-small.svg';
+// import Big from '../img/big.jpg';
 
 const component = () => {
   const element = document.createElement('div');
@@ -15,11 +15,14 @@ const component = () => {
 
   element.appendChild(btn);
 
+  // const myIcon = new Image();
+  // myIcon.src = Icon;
+
+  // element.appendChild(myIcon);
+
   return element;
 };
 
-// printModule();
-// printModule2();
 if (process.env.NODE_ENV === 'production') {
   console.log('in prod env!');
 } else if (process.env.NODE_ENV === 'development') {

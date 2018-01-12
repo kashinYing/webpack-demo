@@ -114,8 +114,9 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
     }),
 
     new HtmlWebpackPlugin({
-      title: config.build.projectTitle,
+      template: resolve('index.html'),
       filename: 'index.html',
+      inject: true,
       minify: {
         removeComments: true,
         collapseWhitespace: true,

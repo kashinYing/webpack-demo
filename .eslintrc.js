@@ -15,5 +15,7 @@ module.exports = {
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 1 : 0,
+    'react/jsx-filename-extension': 0,
+    'react/prefer-stateless-function': 0,
   },
 };
