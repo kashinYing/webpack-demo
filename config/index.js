@@ -20,6 +20,8 @@ module.exports = {
 
     // watch duration 1s
     poll: 1000,
+
+    useFriendlyErrorsPlugin: false,
   },
   build: {
     env: 'production',

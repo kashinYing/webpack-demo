@@ -108,30 +108,35 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    // new FriendlyErrorsPlugin({
-    //   compilationSuccessInfo: {
-    //     messages: [
-    //       `Your application is running here: http://${config.dev.host}:${
-    //         config.dev.port
-    //       }`,
-    //     ],
-    //   },
-    //   onErrors: config.dev.notifyOnErrors
-    //     ? (severity, errors) => {
-    //         if (severity !== 'error') {
-    //           return;
-    //         }
-    //         const error = errors[0];
-    //         notifier.notify({
-    //           title: packageConfig.name,
-    //           message: severity + ': ' + error.name,
-    //           subtitle: error.file || '',
-    //           icon: path.join(__dirname, 'logo.png'),
-    //         });
-    //       }
-    //     : undefined,
-    // }),
   ],
 });
+
+if (config.dev.useFriendlyErrorsPlugin) {
+  devWebpackConfig.plugins.push(
+    new FriendlyErrorsPlugin({
+      compilationSuccessInfo: {
+        messages: [
+          `Your application is running here: http://${config.dev.host}:${
+            config.dev.port
+          }`,
+        ],
+      },
+      onErrors: config.dev.notifyOnErrors
+        ? (severity, errors) => {
+            if (severity !== 'error') {
+              return;
+            }
+            const error = errors[0];
+            notifier.notify({
+              title: packageConfig.name,
+              message: severity + ': ' + error.name,
+              subtitle: error.file || '',
+              icon: path.join(__dirname, 'logo.png'),
+            });
+          }
+        : undefined,
+    }),
+  );
+}
 
 module.exports = devWebpackConfig;
